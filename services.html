@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | True North Immigration</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #E10613;
+    --red-dark: #C30410;
+    --red-light: #fdecea;
+    --navy: #0b1e3d;
+    --off-white: #f9f9f9;
+    --border: #e5e7eb;
+    --text: #111827;
+    --text-muted: #6b7280;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(11,30,61,0.97); backdrop-filter: blur(10px);
+    padding: 0 5%; height: 100px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-icon { width: 40px; height: 40px; background: var(--red); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo-icon i { color: white; font-size: 22px; }
+  .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .nav-logo-text span:first-child { color: #fff; font-weight: 700; font-size: 15px; letter-spacing: 0.3px; }
+  .nav-logo-text span:last-child { color: var(--red); font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a.active { color: #fff; border-bottom: 2px solid var(--red); padding-bottom: 2px; }
+  .nav-cta { background: var(--red); color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--red-dark); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-toggle i { color: #fff; font-size: 26px; }
+  .nav-mobile { display: none; position: fixed; top: 70px; left: 0; right: 0; z-index: 99; background: var(--navy); padding: 20px 5% 28px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .nav-mobile.open { display: block; }
+  .nav-mobile ul { list-style: none; display: flex; flex-direction: column; margin-bottom: 16px; }
+  .nav-mobile ul li a { display: block; padding: 13px 0; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .nav-mobile ul li a:hover { color: #fff; }
+  .nav-mobile .nav-cta { display: block; text-align: center; width: 100%; margin-top: 8px; padding: 13px; }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    margin-top: 70px; height: 220px; position: relative;
+    background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,30,61,0.75) 0%, rgba(11,30,61,0.58) 100%); }
+  .page-hero-content { position: relative; text-align: center; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #fff; margin-bottom: 12px; }
+  .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .breadcrumb a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 14px; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb span { color: rgba(255,255,255,0.4); font-size: 14px; }
+  .breadcrumb .current { color: var(--red); font-size: 14px; font-weight: 500; }
+
+  /* ── SHARED ── */
+  .section-label { display: inline-flex; align-items: center; gap: 6px; color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .section-label::before { content: ''; display: block; width: 22px; height: 2px; background: var(--red); }
+  .section-label.center { justify-content: center; }
+  .section-label.center::before { display: none; }
+  h2.section-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3vw, 38px); font-weight: 700; color: var(--navy); line-height: 1.25; margin-bottom: 14px; }
+  .section-sub { color: var(--text-muted); font-size: 15px; line-height: 1.75; }
+  .btn-primary { background: var(--red); color: #fff; border: none; border-radius: 8px; padding: 13px 26px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s, transform 0.15s; }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+  /* ── INTRO ── */
+  .intro { padding: 72px 5%; text-align: center; }
+  .intro-inner { max-width: 680px; margin: 0 auto; }
+  .intro-inner .section-sub { font-size: 16px; }
+
+  /* ── MAIN SERVICES ── */
+  .main-services { padding: 0 5% 80px; }
+  .main-services-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px; }
+  .service-row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .service-row.reverse { direction: rtl; }
+  .service-row.reverse > * { direction: ltr; }
+  .service-img img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; display: block; }
+  .service-body .section-label { margin-bottom: 10px; }
+  .service-body h3 { font-family: 'Playfair Display', serif; font-size: clamp(22px, 2.5vw, 30px); font-weight: 700; color: var(--navy); margin-bottom: 14px; line-height: 1.3; }
+  .service-body p { color: var(--text-muted); font-size: 15px; line-height: 1.8; margin-bottom: 20px; }
+  .service-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .service-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text); }
+  .service-features li i { color: var(--red); font-size: 17px; flex-shrink: 0; }
+
+  /* ── EXTRA SERVICES ── */
+  .extra-services { padding: 72px 5%; background: var(--off-white); }
+  .extra-services-inner { max-width: 1100px; margin: 0 auto; }
+  .extra-header { text-align: center; margin-bottom: 48px; }
+  .extra-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .extra-card { background: #fff; border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+  .extra-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); }
+  .extra-icon { width: 50px; height: 50px; background: var(--red-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .extra-icon i { color: var(--red); font-size: 22px; }
+  .extra-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+  .extra-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── CTA BANNER ── */
+  .cta-banner { background: var(--navy); padding: 72px 5%; text-align: center; }
+  .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: #fff; margin-bottom: 14px; }
+  .cta-banner p { color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+  /* ── FOOTER ── */
+  footer { background: #060f1e; padding: 48px 5% 28px; }
+  .footer-grid { max-width: 1100px; margin: 0 auto 40px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  .footer-brand p { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.75; margin-top: 14px; max-width: 260px; }
+  .footer-col h4 { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 18px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: #fff; }
+  .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 13px; }
+  .footer-socials { display: flex; gap: 10px; }
+  .footer-social { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
+  .footer-social:hover { background: var(--red); }
+  .footer-social i { color: rgba(255,255,255,0.7); font-size: 16px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links, nav > .nav-cta { display: none; }
+    .nav-toggle { display: block; }
+    .service-row, .service-row.reverse { grid-template-columns: 1fr; direction: ltr; gap: 32px; }
+    .service-row.reverse { direction: ltr; }
+    .extra-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .extra-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .page-hero { height: 180px; }
+  }
+
+  .logo-img{
+  height: 90px;;
+  width:auto;
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<a href="index.html" class="nav-logo">
+  <img
+    src="images/logo.png"
+    alt="True North Immigration"
+    class="logo-img"
+  />
+</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="contact.html" >Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Free Consultation</a>
+  <button class="nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')" aria-label="Menu">
+    <i class="ti ti-menu-2"></i>
+  </button>
+</nav>
+<div class="nav-mobile" id="mobileNav">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Free Consultation</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <h1>Our Services</h1>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span class="current">Services</span>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-inner">
+    <div class="section-label center">What We Offer</div>
+    <h2 class="section-title">Comprehensive Immigration Solutions</h2>
+    <p class="section-sub">From student visas to permanent residency, True North Immigration provides expert guidance for every immigration pathway — handled by licensed RCICs who genuinely care about your outcome.</p>
+  </div>
+</section>
+
+<!-- MAIN SERVICES -->
+<section class="main-services">
+  <div class="main-services-inner">
+
+    <!-- Study Visa -->
+    <div class="service-row">
+      <div class="service-img">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?utm_source=chatgpt.com" alt="Study Visa">
+      </div>
+      <div class="service-body">
+        <div class="section-label">01 — Study Visa</div>
+        <h3>Study Visa</h3>
+        <p>Canada is home to some of the world's top universities and colleges. Our team helps you navigate the student visa process from acceptance letter to landing — smoothly and on time.</p>
+        <ul class="service-features">
+          <li><i class="ti ti-circle-check"></i> University & college admissions guidance</li>
+          <li><i class="ti ti-circle-check"></i> Study permit application & document prep</li>
+          <li><i class="ti ti-circle-check"></i> PGWP (Post-Graduate Work Permit) advice</li>
+          <li><i class="ti ti-circle-check"></i> Biometrics & medical appointment support</li>
+        </ul>
+        <a href="contact.html" class="btn-primary"><i class="ti ti-arrow-right"></i> Get Started</a>
+      </div>
+    </div>
+
+    <!-- Work Permit -->
+    <div class="service-row reverse">
+      <div class="service-img">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&auto=format&fit=crop&q=80" alt="Work Permit">
+      </div>
+      <div class="service-body">
+        <div class="section-label">02 — Work Permit</div>
+        <h3>Work Permit</h3>
+        <p>Whether you have a job offer or are exploring open work permit options, we help skilled workers secure the right permit and build a successful career in Canada.</p>
+        <ul class="service-features">
+          <li><i class="ti ti-circle-check"></i> LMIA-supported & employer-specific permits</li>
+          <li><i class="ti ti-circle-check"></i> Open work permit applications</li>
+          <li><i class="ti ti-circle-check"></i> Intracompany transfers & specialized workers</li>
+          <li><i class="ti ti-circle-check"></i> Work permit renewals & extensions</li>
+        </ul>
+        <a href="contact.html" class="btn-primary"><i class="ti ti-arrow-right"></i> Get Started</a>
+      </div>
+    </div>
+
+    <!-- Visitor Visa -->
+    <div class="service-row">
+      <div class="service-img">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=700&auto=format&fit=crop&q=80" alt="Visitor Visa">
+      </div>
+      <div class="service-body">
+        <div class="section-label">03 — Visitor Visa</div>
+        <h3>Visitor & Tourist Visa</h3>
+        <p>Planning to visit family, attend an event, or explore Canada as a tourist? We handle your Temporary Resident Visa (TRV) application from start to finish with high approval rates.</p>
+        <ul class="service-features">
+          <li><i class="ti ti-circle-check"></i> Temporary Resident Visa (TRV) applications</li>
+          <li><i class="ti ti-circle-check"></i> Super Visa for parents & grandparents</li>
+          <li><i class="ti ti-circle-check"></i> Invitation letter assistance</li>
+          <li><i class="ti ti-circle-check"></i> eTA (Electronic Travel Authorization)</li>
+        </ul>
+        <a href="contact.html" class="btn-primary"><i class="ti ti-arrow-right"></i> Get Started</a>
+      </div>
+    </div>
+
+    <!-- Permanent Residency -->
+    <div class="service-row reverse">
+      <div class="service-img">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&auto=format&fit=crop&q=80" alt="Permanent Residency">
+      </div>
+      <div class="service-body">
+        <div class="section-label">04 — Permanent Residency</div>
+        <h3>Permanent Residency</h3>
+        <p>Make Canada your permanent home. Our licensed RCICs guide you through Express Entry, Provincial Nominee Programs, and family sponsorship to achieve your PR status.</p>
+        <ul class="service-features">
+          <li><i class="ti ti-circle-check"></i> Express Entry (FSW, CEC, FSTP)</li>
+          <li><i class="ti ti-circle-check"></i> Provincial Nominee Program (PNP)</li>
+          <li><i class="ti ti-circle-check"></i> Family sponsorship & spousal PR</li>
+          <li><i class="ti ti-circle-check"></i> CRS score optimization strategies</li>
+        </ul>
+        <a href="contact.html" class="btn-primary"><i class="ti ti-arrow-right"></i> Get Started</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXTRA SERVICES -->
+<section class="extra-services">
+  <div class="extra-services-inner">
+    <div class="extra-header">
+      <div class="section-label center">Additional Support</div>
+      <h2 class="section-title" style="text-align:center;">More Ways We Can Help</h2>
+    </div>
+    <div class="extra-grid">
+      <div class="extra-card">
+        <div class="extra-icon"><i class="ti ti-users"></i></div>
+        <h3>Family Sponsorship</h3>
+        <p>Reunite with your loved ones in Canada. We handle spousal, dependent children, and parent sponsorship applications with care.</p>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon"><i class="ti ti-building"></i></div>
+        <h3>Business Immigration</h3>
+        <p>Start-up visa, investor immigration, and intra-company transfers for entrepreneurs and business owners looking to establish in Canada.</p>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon"><i class="ti ti-refresh"></i></div>
+        <h3>Permit Renewals</h3>
+        <p>Timely renewals for study permits, work permits, and visitor records so you stay in valid status without any interruption.</p>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon"><i class="ti ti-heart"></i></div>
+        <h3>Refugee & Asylum</h3>
+        <p>Compassionate guidance for individuals and families seeking protection and asylum in Canada under humanitarian grounds.</p>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon"><i class="ti ti-file-check"></i></div>
+        <h3>Document Translation</h3>
+        <p>Certified translation of official documents including birth certificates, transcripts, and police clearances for immigration use.</p>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon"><i class="ti ti-headset"></i></div>
+        <h3>Consultation & Appeals</h3>
+        <p>Refused before? We review your case, identify issues, and file appeals or reconsideration requests on your behalf.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2>Not Sure Which Pathway Is Right for You?</h2>
+  <p>Book a free 30-minute consultation with one of our licensed immigration consultants. We'll review your profile and point you in the right direction — at no cost.</p>
+  <a href="contact.html" class="btn-primary" style="font-size:15px; padding:14px 32px;"><i class="ti ti-calendar"></i> Book Free Consultation</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">
+  <img
+    src="images/logo.png"
+    alt="True North Immigration"
+    class="logo-img"
+  />
+</a>
+      <p>Your trusted partner for immigration to Canada and beyond. Licensed, professional, and committed to your success.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Study Visa</a></li>
+        <li><a href="#">Work Permit</a></li>
+        <li><a href="#">Visitor Visa</a></li>
+        <li><a href="#">Permanent Residency</a></li>
+        <li><a href="#">Express Entry</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:info@truenorthimmigration.solutions">info@truenorthimmigration.solutions</a></li>
+        <li><a href="tel:+16475550192">+1 (647) 555-0192</a></li>
+        <li><a href="#">   Head Office 123 Maple Street Toronto,on M5V 2A4</a></li>
+        <li><a href="#">www.truenorthimmigration.solutions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 True North Immigration. All Rights Reserved.</p>
+    <div class="footer-socials">
+      <div class="footer-social"><i class="ti ti-brand-facebook"></i></div>
+      <div class="footer-social"><i class="ti ti-brand-instagram"></i></div>
+      <div class="footer-social"><i class="ti ti-brand-linkedin"></i></div>
+      <div class="footer-social"><i class="ti ti-brand-youtube"></i></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
